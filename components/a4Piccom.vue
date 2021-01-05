@@ -154,13 +154,7 @@ export default {
 						let ret = a4PicModel[funcName](val, this.pt, changeH, this.rotate);
 						this[playField] = ret;
 						
-						//旋转之下 位置纠偏 pt 的相对位移
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						//pl的相对位移
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// 进行合计
-						this.mt =  PT_MT + PL_MT 
-						this.ml = PL_ML + PT_ML
+						this.ptAndPlSum()
 						return;
 					}
 					let ret = a4PicModel[funcName](val, this.pt, this.imgH, this.rotate);
@@ -170,47 +164,25 @@ export default {
 					let ret = a4PicModel[funcName](this.imgW);
 					this[playField] = ret;
 					this.moveType = 2
-					if (this.rotate == 90) {
-						//旋转的情况下 图片宽为高
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						this.mt = PL_MT +  PT_MT
-						this.ml = PL_ML + PT_ML
-					}
+					this.ptAndPlSum()
 				}
 				if (funcName == 'moveLeft') {
 					let ret = a4PicModel[funcName](this.imgW);
 					this[playField] = ret;
 					this.moveType = 1
-					if (this.rotate == 90) {
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						this.mt = PL_MT +  PT_MT
-						this.ml = PL_ML + PT_ML
-					}
+					this.ptAndPlSum()
 				}
 				if (funcName == 'moveRight') {
 					let ret = a4PicModel[funcName](this.imgW);
 					this[playField] = ret;
 					this.moveType = 3
-					if (this.rotate == 90) {
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						this.mt = PL_MT +  PT_MT;
-						this.ml = PL_ML + PT_ML;
-					}
+					this.ptAndPlSum()
 				}
 				if (funcName == 'changeSize') {
 					let ret = a4PicModel[funcName](val, this.imgW, this.imgH, this.pl, this.pt,this.rotate);
 					this.imgH = ret.H;
 					this.imgW = ret.W;
-					if (this.rotate == 90) {
-						//旋转的情况下 图片宽为高
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						this.mt = PL_MT +  PT_MT
-						this.ml = PL_ML + PT_ML
-					}
+					this.ptAndPlSum()
 				}
 				if (funcName == 'rotating') {
 					if (this.rotate == 90) {
@@ -230,14 +202,14 @@ export default {
 				}
 			}
 		},
-		printR(val) {
-			console.log(`--------类型${val}---------`);
-			console.log('mt_left_right:', this.mt_left_right);
-			console.log('ml_left_right:', this.ml_left_right);
-			console.log('mt_up_down:', this.mt_up_down);
-			console.log('ml_up_down:', this.ml_up_down);
-			console.log('mt:', this.mt);
-			console.log('ml:', this.ml);
+		ptAndPlSum() {
+			if (this.rotate == 90) {
+				let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
+				let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
+				this.mt = PL_MT +  PT_MT
+				this.ml = PL_ML + PT_ML
+			}
+			
 		}
 	}
 };
