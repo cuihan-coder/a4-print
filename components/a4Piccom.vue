@@ -156,14 +156,8 @@ export default {
 						
 						//旋转之下 位置纠偏 pt 的相对位移
 						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						// this.mt_up_down = PT_MT;
-						// this.ml_up_down = PT_ML;
-						this.printR('上下移动');
 						//pl的相对位移
 						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
-						this.printR('左右');
 						// 进行合计
 						this.mt =  PT_MT + PL_MT 
 						this.ml = PL_ML + PT_ML
@@ -179,14 +173,9 @@ export default {
 					if (this.rotate == 90) {
 						//旋转的情况下 图片宽为高
 						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
 						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						 // this.mt_up_down = PT_MT;
-						 // this.ml_up_down = PT_ML;
 						this.mt = PL_MT +  PT_MT
 						this.ml = PL_ML + PT_ML
-						this.printR('剧中');
 					}
 				}
 				if (funcName == 'moveLeft') {
@@ -195,14 +184,9 @@ export default {
 					this.moveType = 1
 					if (this.rotate == 90) {
 						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
 						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						 // this.mt_up_down = PT_MT;
-						 // this.ml_up_down = PT_ML;
 						this.mt = PL_MT +  PT_MT
 						this.ml = PL_ML + PT_ML
-						this.printR('左');
 					}
 				}
 				if (funcName == 'moveRight') {
@@ -211,14 +195,9 @@ export default {
 					this.moveType = 3
 					if (this.rotate == 90) {
 						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
 						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						// this.mt_up_down = PT_MT;
-						// this.ml_up_down = PT_ML;
 						this.mt = PL_MT +  PT_MT;
 						this.ml = PL_ML + PT_ML;
-						this.printR('右');
 					}
 				}
 				if (funcName == 'changeSize') {
@@ -228,14 +207,9 @@ export default {
 					if (this.rotate == 90) {
 						//旋转的情况下 图片宽为高
 						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
 						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						 // this.mt_up_down = PT_MT;
-						 // this.ml_up_down = PT_ML;
 						this.mt = PL_MT +  PT_MT
 						this.ml = PL_ML + PT_ML
-						this.printR('剧中');
 					}
 				}
 				if (funcName == 'rotating') {
@@ -251,8 +225,6 @@ export default {
 					this.imgH = ret.H;
 					this.imgW = ret.W;
 					this.rotate = ret.ROTATE;
-					// this.mt_up_down = ret.MT;
-					// this.ml_up_down = ret.ML;
 					this.mt = ret.MT;
 					this.ml = ret.ML;
 				}
